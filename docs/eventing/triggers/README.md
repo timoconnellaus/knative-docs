@@ -60,6 +60,26 @@ delivers them to the custom path `/my-custom-path` for the Kubernetes service `m
     ```
     Where `<filename>` is the name of the file you created in the previous step.
 
+The following trigger receives all the events from the `default` broker and
+delivers them to an external uri `http://some.api.com/`
+
+    ```yaml
+    apiVersion: eventing.knative.dev/v1
+    kind: Trigger
+    metadata:
+      name: my-service-trigger
+    spec:
+      broker: default
+      subscriber:
+        uri: http://some.api.com/
+    ```
+1. Apply the YAML file by running the command:
+
+    ```bash
+    kubectl apply -f <filename>.yaml
+    ```
+    Where `<filename>` is the name of the file you created in the previous step.
+    
 ## Trigger filtering
 
 Exact match filtering on any number of CloudEvents attributes as well as
